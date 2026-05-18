@@ -1,4 +1,5 @@
 import style from "./CardStatus.module.css";
+
 function CardStatus({count,title, icon}) {
   return (
     <>

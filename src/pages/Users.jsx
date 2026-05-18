@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom"
-function Users() {
+function Users({ setDrafts }) {
   return (
     <section className="py-4">
-      <Outlet/>
+      <Outlet context={{ setDrafts }}/>
     </section>
   )
 }

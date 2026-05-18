@@ -3,10 +3,10 @@ import styles from "./Navbar.module.css";
 function Navbar({ adminName = "Super Admin" }) {
   return (
     <nav
-      className={`${styles.nav} nav d-flex justify-content-between align-items-center shadow-sm`}
+      className={`${styles.nav} nav d-flex py-3 px-4 justify-content-between align-items-center shadow-sm`}
     >
       <div
-        className={`${styles.parentImg} d-flex justify-content-between align-items-center`}
+        className={`${styles.parentImg} d-flex  justify-content-between align-items-center`}
       >
         <img src={Logo} alt="" />
       </div>

@@ -1,5 +1,35 @@
+import { Link, useOutletContext } from "react-router-dom";
+import { useState } from "react";
 import style from "./FormDashbord.module.css"
-export default function FormDashbord() {
+export default function FormDashbord({ type }) {
+
+  const { setDrafts } = useOutletContext();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleChange(e) {
+
+    const updatedData = {
+      ...formData,
+      [e.target.name]: e.target.value,
+    };
+
+    setFormData(updatedData);
+
+    // check if any input has value
+    const hasData = Object.values(updatedData).some(
+      (value) => value.trim() !== ""
+    );
+
+    setDrafts((prev) => ({
+      ...prev,
+      [type]: hasData,
+    }));
+  }
+
   return (
     <>
       <div className="container">
@@ -10,6 +40,7 @@ export default function FormDashbord() {
             </label>
             <input
               type="email"
+              onChange={handleChange}
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -27,9 +58,9 @@ export default function FormDashbord() {
             />
           </div>
 
-          <button type="submit" className={`${style.btn1} btn `}>
+          <Link to="/" type="submit" className={`${style.btn1} btn `}>
             Submit
-          </button>
+          </Link>
         </form>
       </div>
     </>

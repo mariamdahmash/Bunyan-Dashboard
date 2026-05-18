@@ -4,6 +4,10 @@
     box-shadow: 7px 7px 11px -4px rgba(0, 0, 0, 0.25);
     max-width: 280px;
 }
+.cardstatus:hover{
+    transition: .3s;
+    scale: 1.05;
+}
 .icon{
     color: var(--main-color);
     font-size: 2rem ;
