@@ -5,6 +5,10 @@ require("dotenv").config();
 const express = require('express')
 const app=express();
 
+//step 0 -> http createServer + app confg 
+const http = require("http")
+const server = http.createServer(app)
+
 // middlware json 
 app.use(express.json());
 
@@ -28,11 +32,20 @@ const loginAdmin = require("./routes/auth.route")
 //route
 app.use("/api/dashboard",loginAdmin)
 
+//create socket
+//step 1 -> Init Socket Server -> using server(createServer + app confg) to create io
+const {Server} = require("socket.io")
+const io = new Server(server,{ 
+    //configration Server Node
+    cors:{
+        origin: "*",
+        methods:["GET", "POST"]
+    }})
+
 //test route
 // app.get("/test",(req,res)=>{
 //     res.json({msg: "Test Route"})
 // })
-
 
 // port 
 const port=process.env.PORT || 3000;
@@ -41,8 +54,8 @@ const port=process.env.PORT || 3000;
 const connectionDB=require("./config/db")
 connectionDB()
 
-//run server 
-app.listen(port,()=>{
+//only run server 
+server.listen(port,()=>{
     console.log(`server runnig on port ${port}`);
  
 }); 
