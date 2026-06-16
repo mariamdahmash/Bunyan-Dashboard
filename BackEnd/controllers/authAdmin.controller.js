@@ -6,7 +6,7 @@ const loginSchema = require("./validation/authAdminValidation")
 const jwt = require("jsonwebtoken")
 
 
-//func
+//login func
 const login = async(req, res) => {
     try{
         //Error Handelling
@@ -31,7 +31,7 @@ const login = async(req, res) => {
             return res.status(400).json({msg:"Invalid Email Or Password"})
         }
         //Toooken
-        const token = jwt.sign({id: admin._id},
+        const token = jwt.sign({id: admin._id, role:"admin"},
             process.env.JWT_SECRET,
             {expiresIn:"1d"}
         )

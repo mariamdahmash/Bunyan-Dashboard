@@ -28,9 +28,13 @@ if(process.env.NODE_ENV === "dev"){
 }
 
 //require authRoute
-const loginAdmin = require("./routes/auth.route")
+const adminRoutes = require("./routes/auth.route");
+const userRoutes = require("./routes/user.route");
+const userAuthRoutes = require("./routes/authUser.route");
 //route
-app.use("/api/dashboard",loginAdmin)
+app.use("/api/dashboard", adminRoutes);
+app.use("/api/dashboard/users", userRoutes);
+app.use("/api/users", userAuthRoutes);
 
 //create socket
 //step 1 -> Init Socket Server -> using server(createServer + app confg) to create io
@@ -42,6 +46,7 @@ const io = new Server(server,{
         methods:["GET", "POST"]
     }})
 
+require("./sockets/chat.socket")(io)
 //test route
 // app.get("/test",(req,res)=>{
 //     res.json({msg: "Test Route"})
